@@ -8,7 +8,14 @@ use OpenApi\Attributes as OA;
 
 #[OA\Info(title: "Codeigniter Api", version: "0.1", description: "Example swagger openApi")]
 #[OA\Server(url: "http://localhost:8080")]
-#[OA\SecurityScheme(securityScheme: "securityScheme", type: "http", scheme: "bearer")]
+#[OA\SecurityScheme(
+    securityScheme: 'bearerAuth',
+    type: 'http',
+    scheme: 'bearer',
+    bearerFormat: 'JWT',
+    name: 'bearerAuth',
+    in: 'header'
+)]
 class SwaggerDocController extends BaseController {
 
     use ResponseTrait;

@@ -6,12 +6,47 @@ use App\Controllers\BaseController;
 use App\Models\UserModel;
 use CodeIgniter\API\ResponseTrait;
 use Firebase\JWT\JWT;
+use OpenApi\Attributes as OA;
 
 class AuthController extends BaseController
 {
 
     use ResponseTrait;
 
+    #[OA\Post(
+        path: '/api/login',
+        summary: 'User login',
+        description: 'Authenticate user and return a token',
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                properties: [
+                    new OA\Property(
+                        property: 'email',
+                        type: 'string',
+                        example: 'admin@gmail.com'
+                    ),
+                    new OA\Property(
+                        property: 'password',
+                        type: 'string',
+                        example: 'admin'
+                    ),
+                ],
+                required: ['email', 'password']
+            )
+        ),
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Successful login',
+                content: new OA\JsonContent(ref: '#/components/schemas/User')
+            ),
+            new OA\Response(
+                response: 401,
+                description: 'Invalid credentials'
+            )
+        ]
+    )]
     public function login()
     {
         if ($this->request->is('post')) {

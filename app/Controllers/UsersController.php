@@ -20,7 +20,8 @@ class UsersController extends BaseController {
             )
         ),
         new OA\Response(response: 401, description: 'Not allowed'),
-        ]
+    ],
+    security: [['bearerAuth' => []]],
     )]
     public function index()
     {
@@ -39,9 +40,16 @@ class UsersController extends BaseController {
     #[OA\Get(
         path: '/api/test',
         responses: [
-            new OA\Response(response: 200, description: 'AOK'),
-            new OA\Response(response: 401, description: 'Not allowed'),
-        ]
+            new OA\Response(
+            response: 200,
+            description: "Test api",
+            content: new OA\JsonContent(
+               ref: "#/components/schemas/User"
+            )
+        ),
+        new OA\Response(response: 401, description: 'Not allowed'),
+    ],
+    security: [['bearerAuth' => []]],
     )]
     public function test()
     {

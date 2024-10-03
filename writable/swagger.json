@@ -11,6 +11,52 @@
         }
     ],
     "paths": {
+        "\/api\/login": {
+            "post": {
+                "summary": "User login",
+                "description": "Authenticate user and return a token",
+                "operationId": "c7798e20b4c32275b766e54e334f3c81",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "admin@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "admin"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials"
+                    }
+                }
+            }
+        },
         "\/api\/users": {
             "get": {
                 "operationId": "bbd2f6548aa41f9fdf76806379daa28f",
@@ -28,7 +74,12 @@
                     "401": {
                         "description": "Not allowed"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "\/api\/test": {
@@ -36,12 +87,24 @@
                 "operationId": "ad5635d8d731ab1ec38733221f7f7d03",
                 "responses": {
                     "200": {
-                        "description": "AOK"
+                        "description": "Test api",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/User"
+                                }
+                            }
+                        }
                     },
                     "401": {
                         "description": "Not allowed"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
@@ -74,8 +137,11 @@
             }
         },
         "securitySchemes": {
-            "securityScheme": {
+            "bearerAuth": {
                 "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
                 "scheme": "bearer"
             }
         }

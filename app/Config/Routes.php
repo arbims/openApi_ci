@@ -7,7 +7,10 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->post('/api/login', 'AuthController::login');
-$routes->get('/api/users', 'UsersController::index', ['filter' => 'authFilter']);
-$routes->get('/api/test', 'UsersController::test', ['filter' => 'authFilter']);
+$routes->group('api', ['filter' => 'authFilter'], static function ($routes) {
+    $routes->get('users', 'UsersController::index');
+    $routes->get('test', 'UsersController::test');
+});
+
 $routes->get('/swagger_json', 'SwaggerDocController::swagger');
 $routes->get('/api/doc', 'SwaggerDocController::index');
