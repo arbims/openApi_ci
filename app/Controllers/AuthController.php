@@ -38,12 +38,10 @@ class AuthController extends BaseController
                 'sub' => $data->id,
                 'exp' => time() + 60,
             ];
-            var_dump(JWT::encode($payload, $privateKey, 'RS256'));die;
             $json = [
                 'token' => JWT::encode($payload, $privateKey, 'RS256'),
             ];
-            var_dump($json);die;
-            $this->respond($json);
+            return $this->respond($json, 200);
         } 
     }
 }
