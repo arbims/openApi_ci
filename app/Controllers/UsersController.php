@@ -3,9 +3,8 @@
 namespace App\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 
-#[OA\Info(title: "My First API", version: "0.1")]
 class UsersController extends BaseController {
 
     use ResponseTrait;
@@ -13,11 +12,38 @@ class UsersController extends BaseController {
     #[OA\Get(
         path: '/api/users',
         responses: [
+            new OA\Response(
+            response: 200,
+            description: "list users",
+            content: new OA\JsonContent(
+               ref: "#/components/schemas/User"
+            )
+        ),
+        new OA\Response(response: 401, description: 'Not allowed'),
+        ]
+    )]
+    public function index()
+    {
+        $users = [];
+        for ($i=0; $i < 10; $i++) { 
+            array_push($users, [
+                'id' => $i,
+                'email' => 'mail'.$i.'@gmail.com',
+                'name' => 'user'.$i,
+                'created' => date('Y-m-d H:i:s')
+            ]);
+        }
+        return $this->respond($users, 200);
+    }
+
+    #[OA\Get(
+        path: '/api/test',
+        responses: [
             new OA\Response(response: 200, description: 'AOK'),
             new OA\Response(response: 401, description: 'Not allowed'),
         ]
     )]
-    public function index()
+    public function test()
     {
         return $this->respond(['status' => 'success', 'message' => 'Welcome to the API']);
     }
