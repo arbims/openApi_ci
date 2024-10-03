@@ -1,0 +1,22 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "My First API",
+        "version": "0.1"
+    },
+    "paths": {
+        "\/api\/users": {
+            "get": {
+                "operationId": "bbd2f6548aa41f9fdf76806379daa28f",
+                "responses": {
+                    "200": {
+                        "description": "AOK"
+                    },
+                    "401": {
+                        "description": "Not allowed"
+                    }
+                }
+            }
+        }
+    }
+}
