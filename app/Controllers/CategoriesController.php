@@ -71,7 +71,7 @@ class CategoriesController extends BaseController {
     }
 
     #[OA\Put(
-        path: '/api/categories/id',
+        path: '/api/categories/{id}',
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
@@ -79,6 +79,15 @@ class CategoriesController extends BaseController {
                 required: ['name', 'slug']
             )
         ),
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                in: "path",
+                required: true,
+                description: "Category ID",
+                schema: new OA\Schema(type: "integer")
+            ),
+        ],
         responses: [
             new OA\Response(
             response: 200,
@@ -105,7 +114,16 @@ class CategoriesController extends BaseController {
     }
 
     #[OA\Delete(
-        path: '/api/categories/id',
+        path: '/api/categories/{id}',
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                in: "path",
+                required: true,
+                description: "Category ID",
+                schema: new OA\Schema(type: "integer")
+            ),
+        ],
         responses: [
             new OA\Response(
             response: 200,

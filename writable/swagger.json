@@ -121,9 +121,20 @@
                 ]
             }
         },
-        "\/api\/categories\/id": {
+        "\/api\/categories\/{id}": {
             "put": {
-                "operationId": "3192dc23d47f1f62c709fdc7fb72a90e",
+                "operationId": "dad80099b88ba10186bfcce7776e6862",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -156,7 +167,18 @@
                 ]
             },
             "delete": {
-                "operationId": "484a5a9382169b64fe2e2b7bbbe1b344",
+                "operationId": "b5d7cdeaf98b61bae89228485b90cb04",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "create category",
