@@ -19,6 +19,7 @@ class openApiConf
             'paths' => [
                 APPPATH . 'Controllers',
                 APPPATH . 'Models',
+                APPPATH . 'Entities'
             ],
         ];
     }

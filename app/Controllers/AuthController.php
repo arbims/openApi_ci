@@ -39,7 +39,15 @@ class AuthController extends BaseController
             new OA\Response(
                 response: 200,
                 description: 'Successful login',
-                content: new OA\JsonContent(ref: '#/components/schemas/User')
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(
+                            property: 'token',
+                            type: 'string',
+                            example: 'gsqGY_-Ç_È-ZAJNQSDKG_È-'
+                        ),
+                    ],
+                )
             ),
             new OA\Response(
                 response: 401,
@@ -71,7 +79,7 @@ class AuthController extends BaseController
             $payload = [
                 'iss' => 'myapp',
                 'sub' => $data->id,
-                'exp' => time() + 60,
+                'exp' => time() + 3600,
             ];
             $json = [
                 'token' => JWT::encode($payload, $privateKey, 'RS256'),
