@@ -17,5 +17,3 @@ $routes->group('api', ['filter' => 'authFilter'], static function ($routes) {
     $routes->delete('categories/(:segment)', 'CategoriesController::delete/$1');
 });
 
-$routes->get('/swagger_json', 'SwaggerDocController::swagger');
-$routes->get('/api/doc', 'SwaggerDocController::index');

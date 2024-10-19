@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace Swagger\Controllers;
 
+use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use OpenApi\Annotations\Server;
 use OpenApi\Attributes as OA;
@@ -20,9 +21,17 @@ class SwaggerDocController extends BaseController {
 
     use ResponseTrait;
     
+    protected $view;
+
+    public function __construct()
+    {
+        $this->view = \Config\Services::renderer(APPPATH . 'ThirdParty/Swagger/src/Views');
+    }
+    
     public function index()
     {
-        return view('swagger/index');
+        // Render the view from the new path
+        return $this->view->render('swagger/index');
     }
 
     public function swagger()
