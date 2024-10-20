@@ -45,4 +45,21 @@ class SwaggerDocController extends BaseController {
     
         return $this->fail('Swagger file not found.');
     }
+
+    #[OA\Get(
+        path: '/api/demo',
+        responses: [
+            new OA\Response(
+            response: 200,
+            description: "List demo",
+        ),
+        new OA\Response(response: 401, description: 'Not allowed'),
+    ],
+    security: [['bearerAuth' => []]],
+    )]
+    public function test()
+    {
+        // Render the view from the new path
+        return $this->view->render('swagger/test');
+    }
 }

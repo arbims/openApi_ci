@@ -3,10 +3,8 @@
 namespace Swagger\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
-use CodeIgniter\CLI\CLI;
-use Config\openApiConf;
-use Config\Swagger;
 use OpenApi\Generator;
+use Swagger\Config\openApiConf;
 
 class SwaggerCommand extends BaseCommand
 {

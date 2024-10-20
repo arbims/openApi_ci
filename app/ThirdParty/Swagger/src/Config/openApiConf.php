@@ -1,6 +1,6 @@
 <?php
 
-namespace Config;
+namespace Swagger\Config;
 
 class openApiConf
 {
@@ -19,7 +19,8 @@ class openApiConf
             'paths' => [
                 APPPATH . 'Controllers',
                 APPPATH . 'Models',
-                APPPATH . 'Entities'
+                APPPATH . 'Entities',
+                APPPATH . 'ThirdParty/Swagger/src/Controllers'
             ],
         ];
     }

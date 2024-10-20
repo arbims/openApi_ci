@@ -250,6 +250,24 @@
                     }
                 ]
             }
+        },
+        "\/api\/demo": {
+            "get": {
+                "operationId": "c58b87d021b7a2ac4f3ec0eda919767d",
+                "responses": {
+                    "200": {
+                        "description": "List demo"
+                    },
+                    "401": {
+                        "description": "Not allowed"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {

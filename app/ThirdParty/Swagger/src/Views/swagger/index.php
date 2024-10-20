@@ -5,6 +5,17 @@
 <head>
     <title>Swagger UI</title>
     <link rel="stylesheet" type="text/css" href="/css/swagger-ui.css">
+    <style>
+        .main a {
+            display: block;
+            background: #ce3a00;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px 0px;
+            color: #FFF !important;
+            font-size: 22px !important;
+        }
+    </style>
 </head>
 <body>
     <div id="swagger-ui"></div>
