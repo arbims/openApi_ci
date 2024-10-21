@@ -6,6 +6,20 @@ class openApiConf
 {
     public static function config(): array
     {
+        $appPath = [];
+        
+        array_push($appPath, APPPATH . 'Controllers');
+        
+        if (is_dir(APPPATH . 'Models')) {
+            array_push($appPath, APPPATH . 'Models');
+        }
+
+        if (is_dir(APPPATH . 'Entities')) {
+            array_push($appPath, APPPATH . 'Entities');
+        }
+
+        array_push($appPath, APPPATH . 'ThirdParty/Swagger/src/Controllers');
+
         return [
             'openapi' => '3.0.0',
             'info' => [
@@ -16,12 +30,7 @@ class openApiConf
             'servers' => [
                 'url' => 'https://api.example.com/v1'
             ],
-            'paths' => [
-                APPPATH . 'Controllers',
-                APPPATH . 'Models',
-                APPPATH . 'Entities',
-                APPPATH . 'ThirdParty/Swagger/src/Controllers'
-            ],
+            'paths' => $appPath,
         ];
     }
 }
