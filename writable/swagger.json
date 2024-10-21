@@ -238,31 +238,6 @@
                 ]
             }
         },
-        "\/api\/test": {
-            "get": {
-                "operationId": "ad5635d8d731ab1ec38733221f7f7d03",
-                "responses": {
-                    "200": {
-                        "description": "Test api",
-                        "content": {
-                            "application\/json": {
-                                "schema": {
-                                    "$ref": "#\/components\/schemas\/User"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Not allowed"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
         "\/api\/demo": {
             "get": {
                 "operationId": "d163f980c7f57e9254b8e0d78d0bdfc3",

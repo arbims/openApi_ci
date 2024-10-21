@@ -36,23 +36,4 @@ class UsersController extends BaseController {
         }
         return $this->respond($users, 200);
     }
-
-    #[OA\Get(
-        path: '/api/test',
-        responses: [
-            new OA\Response(
-            response: 200,
-            description: "Test api",
-            content: new OA\JsonContent(
-               ref: "#/components/schemas/User"
-            )
-        ),
-        new OA\Response(response: 401, description: 'Not allowed'),
-    ],
-    security: [['bearerAuth' => []]],
-    )]
-    public function test()
-    {
-        return $this->respond(['status' => 'success', 'message' => 'Welcome to the API']);
-    }
 }
