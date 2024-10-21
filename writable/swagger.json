@@ -3,7 +3,7 @@
     "info": {
         "title": "Codeigniter Api",
         "description": "Example swagger openApi",
-        "version": "0.1"
+        "version": "1.0"
     },
     "servers": [
         {
@@ -66,6 +66,18 @@
         "\/api\/categories": {
             "get": {
                 "operationId": "4c9994689bd473db782132950a007562",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "list categories",
@@ -253,7 +265,7 @@
         },
         "\/api\/demo": {
             "get": {
-                "operationId": "c58b87d021b7a2ac4f3ec0eda919767d",
+                "operationId": "d163f980c7f57e9254b8e0d78d0bdfc3",
                 "responses": {
                     "200": {
                         "description": "List demo"

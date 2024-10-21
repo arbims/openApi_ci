@@ -7,7 +7,7 @@ use CodeIgniter\API\ResponseTrait;
 use OpenApi\Annotations\Server;
 use OpenApi\Attributes as OA;
 
-#[OA\Info(title: "Codeigniter Api", version: "0.1", description: "Example swagger openApi")]
+#[OA\Info(title: "Codeigniter Api", version: "1.0", description: "Example swagger openApi")]
 #[OA\Server(url: "http://localhost:8080")]
 #[OA\SecurityScheme(
     securityScheme: 'bearerAuth',
@@ -57,9 +57,11 @@ class SwaggerDocController extends BaseController {
     ],
     security: [['bearerAuth' => []]],
     )]
-    public function test()
+    public function demo()
     {
-        // Render the view from the new path
-        return $this->view->render('swagger/test');
+        $data = [
+            'message' => 'welcome to codeigniter swagger api'
+        ];
+        return $this->respond($data, 200);
     }
 }

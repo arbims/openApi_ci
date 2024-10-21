@@ -10,6 +10,7 @@ class CategoriesController extends BaseController {
 
     use ResponseTrait;
     private $categoryModel;
+    const PAGINATE = 3;
 
     public function __construct()
     {
@@ -18,6 +19,15 @@ class CategoriesController extends BaseController {
 
     #[OA\Get(
         path: '/api/categories',
+        parameters:[
+            new OA\Parameter(
+                name: "page",
+                in: "query",
+                required: false,
+                description: "Page number",
+                schema: new OA\Schema(type: "integer", default: 1)
+            ),
+        ],
         responses: [
             new OA\Response(
             response: 200,
@@ -32,8 +42,23 @@ class CategoriesController extends BaseController {
     )]
     public function index()
     {
-        $categories = $this->categoryModel->findAll();
-        return $this->respond($categories, 200);
+        $model = model(CategoryModel::class);
+
+        $data = [
+            'categories' => $model->paginate(self::PAGINATE),
+            'pager' => $model->pager,
+        ];
+        $model->pager->getTotal();
+        $lastPage = ceil($model->pager->getTotal() / self::PAGINATE);
+        if ($this->request->getGet('page') > $lastPage) {
+            $data = [
+                "exception"=> "NotFoundException",
+                "message" => "Not Found",
+                "code" => 404
+            ];
+            return $this->respond($data, 404);
+        }
+        return $this->respond($data, 200);
     }
 
     #[OA\Post(
