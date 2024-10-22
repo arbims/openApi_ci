@@ -4,7 +4,9 @@ namespace App\Controllers;
 
 use App\Models\CategoryModel;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\Response;
 use OpenApi\Attributes as OA;
+use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 
 class CategoriesController extends BaseController {
 
@@ -121,6 +123,7 @@ class CategoriesController extends BaseController {
                ref: "#/components/schemas/Category"
             )
         ),
+        new OA\Response(response: 404, description: 'Object Not Found'),
         new OA\Response(response: 401, description: 'Not allowed'),
     ],
     security: [['bearerAuth' => []]],
@@ -133,7 +136,12 @@ class CategoriesController extends BaseController {
                 return $this->respond(['Errors' => $this->categoryModel->errors()], 200);
             }
             $category = $this->categoryModel->find($id);
-            return $this->respond($category, 200);
+            if ($category) {
+                return $this->respond($category, 200);
+            } else {
+                return $this->respond(['Error' => 'Object Not Found'], 404);
+            }
+            
         }
         return $this->respond(['Error' => 'Method not allowed'], 401);
     }
@@ -157,6 +165,7 @@ class CategoriesController extends BaseController {
                ref: "#/components/schemas/Category"
             )
         ),
+        new OA\Response(response: 404, description: 'Object Not Found'),
         new OA\Response(response: 401, description: 'Not allowed'),
     ],
     security: [['bearerAuth' => []]],
@@ -164,8 +173,12 @@ class CategoriesController extends BaseController {
     public function delete(int $id)
     {
         if ($this->request->is('delete')) {
-            $this->categoryModel->delete($id);
-            return $this->respond(['delete' => 'success'], 200);
+            if ($this->categoryModel->find($id)) {
+                $this->categoryModel->delete($id);
+                return $this->respond(['delete' => 'success'], 200);
+            } else {
+                return $this->respond(['Error' => 'Object Not Found'], 404);
+            }
         }
         return $this->respond(['Error' => 'Method not allowed'], 401);
     }

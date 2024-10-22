@@ -168,6 +168,9 @@
                             }
                         }
                     },
+                    "404": {
+                        "description": "Object Not Found"
+                    },
                     "401": {
                         "description": "Not allowed"
                     }
@@ -201,6 +204,9 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Object Not Found"
                     },
                     "401": {
                         "description": "Not allowed"
