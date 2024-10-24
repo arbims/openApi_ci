@@ -14,7 +14,7 @@ class UserSeed extends Seeder
             'username' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => password_hash('admin', PASSWORD_DEFAULT),
-            'tpken' => ''
+            'token' => ''
     	];
         $userModel->skipValidation(true);
         $userModel->save($data);

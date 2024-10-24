@@ -62,20 +62,20 @@ class AuthController extends BaseController
             $email = $this->request->getVar('email');
             $password = $this->request->getVar('password');
             $data = $user->where('email', $email)->first();
-       
+
             if(is_null($data)) {
                 return $this->respond(['error' => 'Invalid username or password.'], 401);
             }
-            
+
             $pass = $data->password;
             $verify_pass = password_verify($password, $pass);
-    
+
             if(!$verify_pass) {
                 return $this->respond(['error' => 'Invalid username or password.'], 401);
             }
-            
+
             $privateKey = file_get_contents(WRITEPATH . '/jwt.key');
-         
+
             $payload = [
                 'iss' => 'myapp',
                 'sub' => $data->id,
@@ -85,6 +85,6 @@ class AuthController extends BaseController
                 'token' => JWT::encode($payload, $privateKey, 'RS256'),
             ];
             return $this->respond($json, 200);
-        } 
+        }
     }
 }

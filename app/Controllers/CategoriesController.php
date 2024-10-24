@@ -116,15 +116,22 @@ class CategoriesController extends BaseController {
             ),
         ],
         responses: [
-            new OA\Response(
+        new OA\Response(
             response: 200,
             description: "create category",
             content: new OA\JsonContent(
-               ref: "#/components/schemas/Category"
+            ref: "#/components/schemas/Category"
             )
         ),
         new OA\Response(response: 404, description: 'Object Not Found'),
         new OA\Response(response: 401, description: 'Not allowed'),
+        new OA\Response(
+            response: 422,
+            description: 'Validation Error',
+            content: new OA\JsonContent(
+                type: "object"
+            )
+        )
     ],
     security: [['bearerAuth' => []]],
     )]
@@ -133,7 +140,7 @@ class CategoriesController extends BaseController {
         if ($this->request->is('put')) {
             $json_data = $this->request->getJSON();
             if ($this->categoryModel->update($id , $json_data) == false) {
-                return $this->respond(['Errors' => $this->categoryModel->errors()], 200);
+                return $this->respond(['Errors' => $this->categoryModel->errors()], 422);
             }
             $category = $this->categoryModel->find($id);
             if ($category) {
